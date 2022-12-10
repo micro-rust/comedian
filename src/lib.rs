@@ -2,6 +2,10 @@
 
 
 
+#![forbid(unsafe)]
+
+
+
 /// Enumeration of the two endian possibilities.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub enum Endian {
