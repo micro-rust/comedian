@@ -1,8 +1,8 @@
 [package]
-name = "comedian"
+name = "endianness"
 version = "0.1.0"
-edition = "2018"
-authors = "micro-rust"
+edition = "2021"
+authors = ["micro-rust"]
 
 description = "Cross-crate definition of endianness"
 
@@ -11,7 +11,7 @@ license = "MIT"
 publish = true
 
 readme = "README.md"
-repository = "https://github.com/micro-rust/comedian"
+repository = "https://github.com/micro-rust/endianness"
 
 
 

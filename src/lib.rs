@@ -2,13 +2,13 @@
 
 
 
-#![forbid(unsafe)]
+#![forbid(unsafe_code)]
 
 
 
 /// Enumeration of the two endian possibilities.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
-pub enum Endian {
+pub enum Endianness {
     /// Big endian representation.
     Big,
 
@@ -16,25 +16,30 @@ pub enum Endian {
     Little,
 }
 
-impl Default for Endian {
+impl Default for Endianness {
     #[cfg(target_endian = "little")]
     #[inline]
-    fn default() -> Endian {
-        Endian::Little
+    fn default() -> Endianness {
+        Endianness::Little
     }
 
     #[cfg(target_endian = "big")]
     #[inline]
-    fn default() -> Endian {
-        Endian::Big
+    fn default() -> Endianness {
+        Endianness::Big
     }
 }
 
 
 
 /// Single struct type representing the big endianness.
-#[derive(Clone, Copt, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct BigEndian;
+
+impl BigEndian {
+    /// Associated endianness enum value.
+    pub const ENDIANNESS: Endianness = Endianness::Little;
+}
 
 impl Default for BigEndian {
     fn default() -> BigEndian {
@@ -42,10 +47,12 @@ impl Default for BigEndian {
     }
 }
 
-impl TryFrom<Endian> for BigEndian {
-    fn try_from(endian: Endian) -> Result<BigEndian, ()> {
+impl core::convert::TryFrom<Endianness> for BigEndian {
+    type Error = ();
+
+    fn try_from(endian: Endianness) -> Result<BigEndian, ()> {
         match endian {
-            Endian::Big => Ok( BigEndian ),
+            Endianness::Big => Ok( BigEndian ),
             _ => Err(()),
         }
     }
@@ -54,8 +61,13 @@ impl TryFrom<Endian> for BigEndian {
 
 
 /// Single struct type representing the little endianness.
-#[derive(Clone, Copt, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct LittleEndian;
+
+impl LittleEndian {
+    /// Associated endianness enum value.
+    pub const ENDIANNESS: Endianness = Endianness::Little;
+}
 
 impl Default for LittleEndian {
     fn default() -> LittleEndian {
@@ -63,10 +75,12 @@ impl Default for LittleEndian {
     }
 }
 
-impl TryFrom<Endian> for LittleEndian {
-    fn try_from(endian: Endian) -> Result<LittleEndian, ()> {
+impl core::convert::TryFrom<Endianness> for LittleEndian {
+    type Error = ();
+
+    fn try_from(endian: Endianness) -> Result<LittleEndian, ()> {
         match endian {
-            Endian::Little => Ok( LittleEndian ),
+            Endianness::Little => Ok( LittleEndian ),
             _ => Err(()),
         }
     }
