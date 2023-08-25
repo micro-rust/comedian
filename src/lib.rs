@@ -16,6 +16,18 @@ pub enum Endianness {
     Little,
 }
 
+impl Endianness {
+    /// Returns `true` if the instance is little endian.
+    pub const fn little(&self) -> bool {
+        self == Endianness::Little
+    }
+
+    /// Returns `true` if the instance is big endian.
+    pub const fn big(&self) -> bool {
+        self == Endianness::Big
+    }
+}
+
 impl Default for Endianness {
     #[cfg(target_endian = "little")]
     #[inline]
