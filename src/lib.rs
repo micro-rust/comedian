@@ -18,12 +18,12 @@ pub enum Endianness {
 
 impl Endianness {
     /// Returns `true` if the instance is little endian.
-    pub const fn little(&self) -> bool {
+    pub fn little(&self) -> bool {
         *self == Endianness::Little
     }
 
     /// Returns `true` if the instance is big endian.
-    pub const fn big(&self) -> bool {
+    pub fn big(&self) -> bool {
         *self == Endianness::Big
     }
 }
